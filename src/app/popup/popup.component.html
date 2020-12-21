@@ -1,0 +1,89 @@
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+    Open modal
+</button>
+
+<!-- The Modal -->
+<form [formGroup]="PopupForm">
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title titleFont">Create post</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <img class="imgRound" src="assets/Sharmila Pic.png" style="font-weight: 600;">
+                    <div class="namestyle" >Sharmila Mohan</div>
+
+                    <div class="form-group">
+                        <select class="form-control dropdown-align" formControlName="cPrivacy">
+                            <option *ngFor="let pri of privacy" [ngValue]=pri.id>
+                                {{pri.Name}}
+                            </option>
+                            
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" style="border: none !important;" formControlName="whatsOnMind"
+                            class="form-control" placeholder="What's On Your Mind?">
+                    </div>
+                    <div>
+                        <!-- <img class="sparkleimg" src="assets/A45F.gif"> -->
+                        <img class="sparkleimg" *ngIf="imageshow" [src]="imageURL">
+                    </div>
+                    <div class="post mt15">
+                        Add to Your post <label for ="file-input">
+                            <i  title="image/Video"  class='fas fa-camera imageVideo'></i> 
+                        </label>
+                        <input type = "file" id = "file-input" (change)="OnFileSelected($event)" style="display:none">
+                    </div>
+                    <div class="lockeyword form-group">
+                        <div>
+                            <label for="Location">Location:</label>
+                            <input class="ml10" type="text" formControlName="location" />
+                        </div>
+                        <div>
+                            <label for="Keyword">Keyword:</label>
+                            <input class="ml10 width80" type="text" formControlName="keyword" />
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" (click)="onSubmitClick()" data-toggle="modal" data-target="#succes" class="btn btn-primary btn-block">Write a Post</button>
+                </div>
+
+            </div>
+        </div>
+        
+    </div>
+   
+</form>
+
+<div class="modal" id="success">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Modal Heading</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body" *ngIf="WriteApostDetails; else elseBlock"> Data Uploaded Successfully</div>
+              <ng-template #elseBlock>Error! Please try after some time</ng-template>
+      
+  
+         
+      </div>
+    </div>
+  </div>
+
